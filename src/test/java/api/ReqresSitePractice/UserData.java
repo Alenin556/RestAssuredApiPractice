@@ -1,4 +1,4 @@
-package api;
+package api.ReqresSitePractice;
 
 public class UserData {
 
