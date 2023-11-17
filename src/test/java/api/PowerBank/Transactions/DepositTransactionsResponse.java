@@ -7,8 +7,6 @@ import java.util.List;
 
 public class DepositTransactionsResponse {
     List <DepositTransaction> depositTransactions;
-//    @JsonIgnoreProperties
-//    @JsonProperty("pagination")
     Pagination pagination;
 
     public DepositTransactionsResponse() {
