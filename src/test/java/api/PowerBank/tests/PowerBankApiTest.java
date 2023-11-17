@@ -99,7 +99,7 @@ public class PowerBankApiTest {
         depositTransactionResponse.getDepositTransactions().stream().forEach(x -> Assert.assertTrue(x.getName().contains("Пополнение вклада")));
 
         depositTransactionResponse.getDepositTransactions().get(3);
-        depositTransactionResponse.getPagination().
+
 
 //        depositTransactionResponse.stream().forEach(x -> Assert.assertTrue(x.getName().contains("Пополнение вклада")));
     }
