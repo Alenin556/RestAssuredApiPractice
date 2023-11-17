@@ -1,12 +1,14 @@
 package api.PowerBank.Transactions;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class DepositTransactionsResponse {
     List <DepositTransaction> depositTransactions;
-    @JsonIgnoreProperties
+//    @JsonIgnoreProperties
+//    @JsonProperty("pagination")
     Pagination pagination;
 
     public DepositTransactionsResponse() {
@@ -19,5 +21,9 @@ public class DepositTransactionsResponse {
 
     public List<DepositTransaction> getDepositTransactions() {
         return depositTransactions;
+    }
+
+    public Pagination getPagination() {
+        return pagination;
     }
 }
