@@ -16,7 +16,6 @@ import static io.restassured.RestAssured.given;
 
 public class PowerBankApiTest {
     private final static String URL = "http://172.17.1.45:7254/api/v1";
-    private static String email = "@reqres.in";
 
     @Test
     public void authToken(){

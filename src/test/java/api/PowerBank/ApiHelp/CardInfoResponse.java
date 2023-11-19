@@ -3,15 +3,15 @@ package api.PowerBank.ApiHelp;
 import java.util.List;
 
 public class CardInfoResponse {
-    List<CardInfo> cardInfo;
+    List<CardAgreementInfo> cardAgreementInfo;
 
     public CardInfoResponse(){};
 
-    public CardInfoResponse(List<CardInfo> cardInfo) {
-        this.cardInfo = cardInfo;
+    public CardInfoResponse(List<CardAgreementInfo> cardAgreementInfo) {
+        this.cardAgreementInfo = cardAgreementInfo;
     }
 
-    public List<CardInfo> getCardInfo() {
-        return cardInfo;
+    public List<CardAgreementInfo> getCardInfo() {
+        return cardAgreementInfo;
     }
 }

@@ -1,6 +1,6 @@
 package api.PowerBank.ApiHelp;
 
-public class CardInfo {
+public class CardAgreementInfo {
     public String name;
     public String cardNumber;
     public String expirationDate;
@@ -11,10 +11,10 @@ public class CardInfo {
     public Boolean isUserBlocked;
     public Boolean isBankBlocked;
 
-    public CardInfo(){
+    public CardAgreementInfo(){
     };
 
-    public CardInfo(String name, String cardNumber, String expirationDate, String paymentSystem, String currencyCode, Integer currentBalance, String type, Boolean isUserBlocked, Boolean isBankBlocked) {
+    public CardAgreementInfo(String name, String cardNumber, String expirationDate, String paymentSystem, String currencyCode, Integer currentBalance, String type, Boolean isUserBlocked, Boolean isBankBlocked) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.expirationDate = expirationDate;
