@@ -1,7 +1,5 @@
-package api.PowerBank.Transactions;
+package api.PowerBank.ApiHelp;
 
-
-import io.qameta.allure.internal.shadowed.jackson.annotation.JsonProperty;
 
 import java.util.List;
 

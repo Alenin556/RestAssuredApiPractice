@@ -1,8 +1,6 @@
 package api.PowerBank.ApiHelp;
 
 import api.ReqresSitePractice.Specifications;
-import api.PowerBank.Auth;
-import api.PowerBank.Token;
 import org.junit.Assert;
 
 

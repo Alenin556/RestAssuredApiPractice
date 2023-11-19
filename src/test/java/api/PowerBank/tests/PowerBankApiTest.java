@@ -1,14 +1,12 @@
 package api.PowerBank.tests;
 
 import api.PowerBank.ApiHelp.GetToken;
-import api.PowerBank.Transactions.DepositTransactionsResponse;
+import api.PowerBank.ApiHelp.DepositTransactionsResponse;
 import api.ReqresSitePractice.Specifications;
-import api.ReqresSitePractice.UserData;
-import api.PowerBank.Auth;
-import api.PowerBank.Token;
-import api.PowerBank.Transactions.DepositTransaction;
-import api.PowerBank.Transactions.TransactionBody;
-import io.restassured.http.ContentType;
+import api.PowerBank.ApiHelp.Auth;
+import api.PowerBank.ApiHelp.Token;
+import api.PowerBank.ApiHelp.DepositTransaction;
+import api.PowerBank.ApiHelp.TransactionBody;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -70,9 +68,6 @@ public class PowerBankApiTest {
 
     @Test
     public void EP6TransactionHistory1(){
-
-        //pagination ?? unrecognize field ???
-        // Посмотреть/реализовать
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
         GetToken getToken = new GetToken();
 
@@ -80,7 +75,7 @@ public class PowerBankApiTest {
         TransactionBody transactionBody = new TransactionBody(0, 10,"1403202300001A","2022-07-18","2023-07-18","Пополнение вклада");
 
         DepositTransactionsResponse depositTransactionResponse = (given()
-                //подставляем данные body
+                //подставляем данные header + body
                 .header("Authorization", "Bearer " + getToken.accessToken("79772345685","ls23Ghq#wEr"))
                 .body(transactionBody)
                 .when()

@@ -1,4 +1,4 @@
-package api.PowerBank;
+package api.PowerBank.ApiHelp;
 
 public class Token {
     public String accessToken;
