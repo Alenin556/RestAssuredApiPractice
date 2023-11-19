@@ -31,16 +31,11 @@ public class Ep4_1 {
         String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
 //      accessToken передаем в header() вместе с доп заголовками: "Authorization", "Bearer "
 
-
-        //Создаем конструктор и определяем данные, которые передадим в body запроса
-        TransactionBody transactionBody = new TransactionBody(0, 10, "1403202300001A", "2022-07-18", "2023-07-18", "Пополнение вклада");
-
         List<CardInfo> cardInfo = (
                 given()
                         //подставляем данные header
                         .header("Authorization", "Bearer " + accessToken)
                         //подставляем данные body
-                        .body(transactionBody)
                         .when()
                         // указываем endpoint и HTTP метод
                         .get("/card/agreements")
