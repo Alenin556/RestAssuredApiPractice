@@ -79,7 +79,7 @@ public class Ep4_2 {
                 .header("Authorization", "Bearer " + accessToken)
                 //подставляем данные body
                 .when()
-                // указываем endpoint и HTTP метод
+                // указываем endpoint и HTTP метод и необходимую карту
                 .get("/card/products" + card)
                 .then()
                 .log()
@@ -121,7 +121,7 @@ public class Ep4_2 {
                 .header("Authorization", "Bearer " + accessToken)
                 //подставляем данные body
                 .when()
-                // указываем endpoint и HTTP метод
+                // указываем endpoint и HTTP метод и необходимую карту
                 .get("/card/products" + card)
                 .then()
                 .log()
