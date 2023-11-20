@@ -1,4 +1,4 @@
-package api.PowerBank.ApiHelp;
+package api.PowerBank.ApiHelp.CardService;
 
 public class CardAgreementInfo {
     public String name;

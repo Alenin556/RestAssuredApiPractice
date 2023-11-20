@@ -1,4 +1,4 @@
-package api.PowerBank.ApiHelp;
+package api.PowerBank.ApiHelp.DepositService;
 
 
 import java.util.List;

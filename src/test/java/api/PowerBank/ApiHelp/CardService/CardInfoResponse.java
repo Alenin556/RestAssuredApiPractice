@@ -1,4 +1,6 @@
-package api.PowerBank.ApiHelp;
+package api.PowerBank.ApiHelp.CardService;
+
+import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 
 import java.util.List;
 

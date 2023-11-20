@@ -1,4 +1,4 @@
-package api.PowerBank.ApiHelp;
+package api.PowerBank.ApiHelp.DepositService;
 
 public class DepositTransaction {
     public String date;
