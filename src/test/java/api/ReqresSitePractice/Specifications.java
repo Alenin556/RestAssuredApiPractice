@@ -25,6 +25,12 @@ public class Specifications {
                 .expectStatusCode(400)
                 .build();
     }
+
+    public static ResponseSpecification responseSpecUnauthorized401() {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(401)
+                .build();
+    }
     public static ResponseSpecification responseSpecBAD500() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(500)

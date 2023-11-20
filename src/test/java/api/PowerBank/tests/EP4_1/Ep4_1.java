@@ -2,14 +2,11 @@ package api.PowerBank.tests.EP4_1;
 
 import api.PowerBank.ApiHelp.*;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
-import api.PowerBank.ApiHelp.CardService.CardProductInfo;
-import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
 import api.ReqresSitePractice.Specifications;
 import groovy.util.logging.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -36,7 +33,7 @@ public class Ep4_1 {
         List<CardAgreementInfo> cardAgreementInfo = (
                 given()
                         //подставляем параметры запроса
-                        .param("isActive","true")
+                        .param("isActive", "true")
                         //подставляем данные header
                         .header("Authorization", "Bearer " + accessToken)
                         //подставляем данные body
@@ -56,8 +53,8 @@ public class Ep4_1 {
         );
 
         //Проверяем что пользователь не заблокирован
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(),false));
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(),false));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(), false));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
     }
 
 
@@ -78,8 +75,8 @@ public class Ep4_1 {
         List<CardAgreementInfo> cardAgreementInfo = (
                 given()
                         //подставляем параметры запроса
-                        .param("isActive","true")
-                        .param("type","debet")
+                        .param("isActive", "true")
+                        .param("type", "debet")
                         //подставляем данные header
                         .header("Authorization", "Bearer " + accessToken)
                         //подставляем данные body
@@ -99,7 +96,7 @@ public class Ep4_1 {
         );
 
         //Проверяем тип карт
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(),"debet"));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "debet"));
     }
 
     @Test
@@ -119,8 +116,8 @@ public class Ep4_1 {
         List<CardAgreementInfo> cardAgreementInfo = (
                 given()
                         //подставляем параметры запроса
-                        .param("isActive","true")
-                        .param("type","credit")
+                        .param("isActive", "true")
+                        .param("type", "credit")
                         //подставляем данные header
                         .header("Authorization", "Bearer " + accessToken)
                         //подставляем данные body
@@ -140,9 +137,144 @@ public class Ep4_1 {
         );
 
         //Проверяем тип карт
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(),"credit"));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
     }
 
+    @Test
+    public void EP4_1GetInfoAboutVirtualCardTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
+        //класс в котором у нас лежит метод по получению access token
+        GetToken getToken = new GetToken();
+
+//        Данные для авторизации:
+//        Телефон: 76666666666
+//        Пароль: Ihave6Cards!
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        List<CardAgreementInfo> cardAgreementInfo = (
+                given()
+                        //подставляем параметры запроса
+                        .param("isActive", "true")
+                        .param("type", "virtual")
+                        //подставляем данные header
+                        .header("Authorization", "Bearer " + accessToken)
+                        //подставляем данные body
+                        .when()
+                        // указываем endpoint и HTTP метод
+                        .get("/card/agreements")
+                        .then()
+                        .log()
+                        .all()
+
+                        //извлекаем ответ в класс
+                        .extract()
+                        .body()
+                        .jsonPath()
+                        //в пути ставим точку так как нет явного открытия массива в теле ответа
+                        .getList(".", CardAgreementInfo.class)
+        );
+
+        //Проверяем тип карт
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "virtual"));
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutNoCardsClientTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        //класс в котором у нас лежит метод по получению access token
+        GetToken getToken = new GetToken();
+
+//        Данные для авторизации:
+//        Телефон: 75335178939
+//        Пароль: 1z3rgtY&1y6
+
+        String accessToken = getToken.accessToken("75335178939", "1z3rgtY&1y6");
+
+        List<CardAgreementInfo> cardAgreementInfo = (
+                given()
+                        //подставляем параметры запроса
+                        .param("isActive", "true")
+                        //подставляем данные header
+                        .header("Authorization", "Bearer " + accessToken)
+                        //подставляем данные body
+                        .when()
+                        // указываем endpoint и HTTP метод
+                        .get("/card/agreements")
+                        .then()
+                        .log()
+                        .all()
+
+                        //извлекаем ответ в класс
+                        .extract()
+                        .body()
+                        .jsonPath()
+                        //в пути ставим точку так как нет явного открытия массива в теле ответа
+                        .getList(".", CardAgreementInfo.class)
+        );
+
+        //Проверяем что ответ в body пустой, т.е. класс пуст и не имеет ни одного ответа в поле
+        Assertions.assertEquals(cardAgreementInfo.size(), 0);
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutUncorrectTypeCardTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecError400());
+
+        //класс в котором у нас лежит метод по получению access token
+        GetToken getToken = new GetToken();
+
+//        Данные для авторизации под кредами Анатолия Петрова:
+//        номер телефона: 79772345685
+//        пароль: ls23Ghq#wEr
+
+        String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
+
+        List<CardAgreementInfo> cardAgreementInfo = (
+                given()
+                        //подставляем параметры запроса
+                        .param("isActive", "true")
+                        .param("type", "1")
+                        //подставляем данные header
+                        .header("Authorization", "Bearer " + accessToken)
+                        //подставляем данные body
+                        .when()
+                        // указываем endpoint и HTTP метод
+                        .get("/card/agreements")
+                        .then()
+                        .log()
+                        .all()
+
+                        //извлекаем ответ в класс
+                        .extract()
+                        .body()
+                        .jsonPath()
+                        //в пути ставим точку так как нет явного открытия массива в теле ответа
+                        .getList(".", CardAgreementInfo.class)
+        );
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutCardWithoutAuthorizationTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUnauthorized401());
+
+        given()
+                .param("isActive", "true")
+                //подставляем данные header
+                .header("Authorization", "Bearer ")
+                //подставляем данные body
+                .when()
+                // указываем endpoint и HTTP метод
+                .get("/card/agreements")
+                .then()
+                .log()
+                .all();
+    }
 
 }
