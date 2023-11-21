@@ -7,12 +7,7 @@ import org.junit.Assert;
 import static io.restassured.RestAssured.given;
 
 public class GetToken {
-    private final static String URL = "http://172.17.1.45:7254/api/v1";
-
-
     public String accessToken(String mobilePhone, String passwordEncode){
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
-
         //Создаем конструктор с данными для авторизации
         Auth auth = new Auth(mobilePhone,passwordEncode);
 

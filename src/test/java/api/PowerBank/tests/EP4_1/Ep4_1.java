@@ -2,8 +2,10 @@ package api.PowerBank.tests.EP4_1;
 
 import api.PowerBank.ApiHelp.*;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
+import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.ReqresSitePractice.Specifications;
 import groovy.util.logging.Slf4j;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +23,7 @@ public class Ep4_1 {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
-        //класс в котором у нас лежит метод по получению access token
+        //Класс в котором у нас лежит метод по получению access token
         GetToken getToken = new GetToken();
 
 //        Данные для авторизации Анатолия Петрова:
@@ -44,7 +46,7 @@ public class Ep4_1 {
                         .log()
                         .all()
 
-                        //извлекаем ответ в класс
+                        //извлекаем ответ в класс pojo
                         .extract()
                         .body()
                         .jsonPath()
@@ -57,13 +59,36 @@ public class Ep4_1 {
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
     }
 
+    @Test
+    public void EP4_1GetInfoAboutClientCardRequestMethodTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        //Создаем объект для использования метода по отправке запроса
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
+//      accessToken передаем в метод, где происходит подстановка в header(), вместе с доп заголовками: "Authorization", "Bearer "
+
+        //присваиваем переменной ответ для обработки и проверки
+       var response = cardRequests.getCardAgreementsInfoRequest("isActive","true",accessToken);
+
+        //Проверяем что пользователь не заблокирован
+        response.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(), false));
+        response.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
+    }
+
+
+
 
     @Test
     public void EP4_1GetInfoAboutDebetCardTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
-        //класс в котором у нас лежит метод по получению access token
+        //Класс в котором у нас лежит метод по получению access token
         GetToken getToken = new GetToken();
 
 //        Данные для авторизации:
@@ -87,7 +112,7 @@ public class Ep4_1 {
                         .log()
                         .all()
 
-                        //извлекаем ответ в класс
+                        //извлекаем ответ в класс pojo
                         .extract()
                         .body()
                         .jsonPath()
@@ -97,6 +122,21 @@ public class Ep4_1 {
 
         //Проверяем тип карт
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "debet"));
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutDebetCardMethodRequestTest() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        var response = cardRequests.getCardAgreementsInfoRequest("isActive","true",accessToken,"debet");
+
+        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "debet"));
     }
 
     @Test
@@ -128,7 +168,7 @@ public class Ep4_1 {
                         .log()
                         .all()
 
-                        //извлекаем ответ в класс
+                        //извлекаем ответ в класс pojo
                         .extract()
                         .body()
                         .jsonPath()
@@ -138,6 +178,21 @@ public class Ep4_1 {
 
         //Проверяем тип карт
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutCreditCardMethodRequestTest() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        var response = cardRequests.getCardAgreementsInfoRequest("isActive","true",accessToken,"credit");
+
+        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
     }
 
     @Test
@@ -169,7 +224,7 @@ public class Ep4_1 {
                         .log()
                         .all()
 
-                        //извлекаем ответ в класс
+                        //извлекаем ответ в класс pojo
                         .extract()
                         .body()
                         .jsonPath()
@@ -179,6 +234,21 @@ public class Ep4_1 {
 
         //Проверяем тип карт
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "virtual"));
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutVirtualCardMethodRequestTest() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        var response = cardRequests.getCardAgreementsInfoRequest("isActive","true",accessToken,"virtual");
+
+        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "virtual"));
     }
 
     @Test
@@ -209,7 +279,7 @@ public class Ep4_1 {
                         .log()
                         .all()
 
-                        //извлекаем ответ в класс
+                        //извлекаем ответ в класс pojo
                         .extract()
                         .body()
                         .jsonPath()
@@ -222,6 +292,23 @@ public class Ep4_1 {
     }
 
     @Test
+    public void EP4_1GetInfoAboutNoCardsClientMethodRequestTest() {
+
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("75335178939", "1z3rgtY&1y6");
+
+        var response = cardRequests.getCardAgreementsInfoRequest("isActive","true", accessToken);
+
+        Assertions.assertEquals(response.size(), 0);
+    }
+
+    @Test
+    //баг приходит ответ 200 и пустой массив, вместо 400
     public void EP4_1GetInfoAboutUncorrectTypeCardTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecError400());
@@ -250,13 +337,28 @@ public class Ep4_1 {
                         .log()
                         .all()
 
-                        //извлекаем ответ в класс
+                        //извлекаем ответ в класс pojo
                         .extract()
                         .body()
                         .jsonPath()
                         //в пути ставим точку так как нет явного открытия массива в теле ответа
                         .getList(".", CardAgreementInfo.class)
         );
+    }
+
+    @Test
+    //баг приходит ответ 200 и пустой массив, вместо 400
+    public void EP4_1GetInfoAboutUncorrectTypeCardMethodRequestTest() {
+
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecError400());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("75335178939", "1z3rgtY&1y6");
+
+        cardRequests.getCardAgreementsInfoRequest("isActive","true", accessToken,"1");
     }
 
     @Test
@@ -275,6 +377,16 @@ public class Ep4_1 {
                 .then()
                 .log()
                 .all();
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutCardWithoutAuthorizationMethodRequestTest() {
+
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecUnauthorized401());
+
+        CardRequests cardRequests = new CardRequests();
+
+        cardRequests.getCardAgreementsInfoRequest("isActive","true");
     }
 
 }
