@@ -9,6 +9,7 @@ import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -81,8 +82,6 @@ public class Ep4_1 {
     }
 
 
-
-
     @Test
     public void EP4_1GetInfoAboutDebetCardTest() {
         //Пред установки и пред проверка запроса на статус ответа
@@ -133,6 +132,22 @@ public class Ep4_1 {
         GetToken getToken = new GetToken();
 
         String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        //таблица Param
+        //поиск по ключу и вывод значения для ввода в параметр
+
+        java.util.Map<String, String> params = new HashMap<>();
+
+        // Добавляем элементы в Map
+        params.put("isActive", "true");
+        params.put("type","debet");
+        params.put("type","credit");
+        params.put("type","virtual");
+
+        for(String keyName: params.keySet()){
+            System.out.println(keyName);
+            System.out.println(params.get(keyName));
+        }
 
         var response = cardRequests.getCardAgreementsInfoRequest("isActive","true",accessToken,"debet");
 

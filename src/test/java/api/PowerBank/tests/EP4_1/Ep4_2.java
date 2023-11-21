@@ -131,7 +131,7 @@ public class Ep4_2 {
                 .extract()
                 .body()
                 //в пути ставим точку так как нет явного открытия массива в теле ответа
-                .as( CardProductInfo.class)
+                .as(CardProductInfo.class)
         );
 
         //Проверяем название карты и ее тип

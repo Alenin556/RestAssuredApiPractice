@@ -56,6 +56,11 @@ public class CardRequests {
     //Перегрузить метод или сделать отдельным для типа карты?
     public List<CardAgreementInfo> getCardAgreementsInfoRequest(String paramName, String paramValue, String accessToken, String cardType) {
 
+        // массив в параметр вместо param*
+        // список параметров*
+
+
+
         List<CardAgreementInfo> cardAgreementInfo;
 
         cardAgreementInfo = (
