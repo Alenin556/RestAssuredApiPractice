@@ -4,10 +4,14 @@ import api.PowerBank.ApiHelp.CardService.CardProductInfo;
 import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.ReqresSitePractice.Specifications;
+import io.restassured.response.Response;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -106,6 +110,13 @@ public class Ep4_2 {
         //класс в котором у нас лежит метод по получению access token
         GetToken getToken = new GetToken();
         String card = "/Shopping%20Card/";
+        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> headersMap = new HashMap<>();
+
+//
+//        // Добавляем элементы в Map
+//        paramsMap.put("isActive", "true");
+//        paramsMap.put("type","debet");
 
 //        Данные для авторизации:
 //
@@ -115,13 +126,13 @@ public class Ep4_2 {
         String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
 //      accessToken передаем в header() вместе с доп заголовками: "Authorization", "Bearer "
 
-        CardProductInfo cardProductInfo  = (given()
-                .param("isActive", "true")
-                //подставляем данные header
-                .header("Authorization", "Bearer " + accessToken)
-                //подставляем данные body
+        paramsMap.put("isActive", "true");
+        headersMap.put("Authorization", "Bearer " + accessToken);
+
+        Response getWithParamResponse = (Response) given()
+                .params(paramsMap)
+                .headers(headersMap)
                 .when()
-                // указываем endpoint и HTTP метод и необходимую карту
                 .get("/card/products" + card)
                 .then()
                 .log()
@@ -129,10 +140,28 @@ public class Ep4_2 {
 
                 //извлекаем ответ в класс
                 .extract()
-                .body()
-                //в пути ставим точку так как нет явного открытия массива в теле ответа
-                .as(CardProductInfo.class)
-        );
+                .body();
+
+        CardProductInfo cardProductInfo = getWithParamResponse.as(CardProductInfo.class);
+
+//        CardProductInfo cardProductInfo  = (given()
+//                .param("isActive", "true")
+//                //подставляем данные header
+//                .header("Authorization", "Bearer " + accessToken)
+//                //подставляем данные body
+//                .when()
+//                // указываем endpoint и HTTP метод и необходимую карту
+//                .get("/card/products" + card)
+//                .then()
+//                .log()
+//                .all()
+//
+//                //извлекаем ответ в класс
+//                .extract()
+//                .body()
+//                //в пути ставим точку так как нет явного открытия массива в теле ответа
+//                .as(CardProductInfo.class)
+//        );
 
         //Проверяем название карты и ее тип
         cardProductInfo.getName().equals("Shopping Card");
