@@ -1,4 +1,6 @@
-package api.PowerBank.ApiHelp.CardService;
+package api.PowerBank.ApiHelp;
+
+import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 
 import java.util.List;
 
@@ -6,6 +8,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiRequests {
 
+    // сделать метод абстрактным? чтобы каждый класс имел свою реализацию и перегрузку метода?
     public List<CardAgreementInfo> getRequest(String paramName, String paramValue, String accessToken, String endpoint) {
         List<CardAgreementInfo> cardAgreementInfo;
 

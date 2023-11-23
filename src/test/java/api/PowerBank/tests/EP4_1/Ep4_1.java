@@ -1,7 +1,7 @@
 package api.PowerBank.tests.EP4_1;
 
 import api.PowerBank.ApiHelp.*;
-import api.PowerBank.ApiHelp.CardService.ApiRequests;
+import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.ReqresSitePractice.Specifications;

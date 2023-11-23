@@ -20,7 +20,7 @@ public class Ep4_2 {
     private final static String URL = "http://172.17.1.45:7254/api/v1";
 
     @Test
-    public void EP4_1GetInfoAboutBankCardProductsTest() {
+    public void EP4_2GetInfoAboutBankCardProductsTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
@@ -61,7 +61,7 @@ public class Ep4_2 {
     }
 
     @Test
-    public void EP4_1GetInfoAboutShoppingCardProductErrorTest() {
+    public void EP4_2GetInfoAboutShoppingCardProductErrorTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
@@ -103,13 +103,14 @@ public class Ep4_2 {
         //Проверяем название карты и ее тип
     }
     @Test
-    public void EP4_1GetInfoAboutShoppingCardProductTest() {
+    public void EP4_2GetInfoAboutShoppingCardProductTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
         //класс в котором у нас лежит метод по получению access token
         GetToken getToken = new GetToken();
         String card = "/Shopping%20Card/";
+
         Map<String, String> paramsMap = new HashMap<>();
         Map<String, String> headersMap = new HashMap<>();
 
