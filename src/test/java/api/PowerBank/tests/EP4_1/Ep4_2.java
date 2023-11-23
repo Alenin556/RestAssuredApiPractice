@@ -1,5 +1,6 @@
 package api.PowerBank.tests.EP4_1;
 
+import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardProductInfo;
 import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
 import api.PowerBank.ApiHelp.GetToken;
@@ -13,11 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
 import static io.restassured.RestAssured.given;
 
 public class Ep4_2 {
 
-    private final static String URL = "http://172.17.1.45:7254/api/v1";
+    private final static String URL = "http://172.17.1.46:7254/api/v1";
 
     @Test
     public void EP4_2GetInfoAboutBankCardProductsTest() {
@@ -97,10 +99,11 @@ public class Ep4_2 {
 
                 // Ошибка в тесте возникает потому что мы неправильно определяем тип получаемого ответа и хотим записать его в список,
                 // когда тело ответа содержит объект типа LinkedHashMap, поэтому следующий тест будет иметь правильный вид
-                //где мы присваиваем ответ объекту, без явного определения коллекции List : CardProductInfo cardProductInfo  = (given()...
+                //где мы присваиваем ответ объекту, без явного определения коллекции List
+                // Правильная инициализация:
+                // CardProductInfo cardProductInfo  = (given()...
         );
 
-        //Проверяем название карты и ее тип
     }
     @Test
     public void EP4_2GetInfoAboutShoppingCardProductTest() {
@@ -109,22 +112,13 @@ public class Ep4_2 {
 
         //класс в котором у нас лежит метод по получению access token
         GetToken getToken = new GetToken();
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
         String card = "/Shopping%20Card/";
 
         Map<String, String> paramsMap = new HashMap<>();
         Map<String, String> headersMap = new HashMap<>();
 
-//
-//        // Добавляем элементы в Map
-//        paramsMap.put("isActive", "true");
-//        paramsMap.put("type","debet");
-
-//        Данные для авторизации:
-//
-//        Телефон: 76666666666
-//        Пароль: Ihave6Cards!
-
-        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
 //      accessToken передаем в header() вместе с доп заголовками: "Authorization", "Bearer "
 
         paramsMap.put("isActive", "true");
@@ -165,6 +159,66 @@ public class Ep4_2 {
 //        );
 
         //Проверяем название карты и ее тип
+        cardProductInfo.getName().equals("Shopping Card");
+        cardProductInfo.getType().equals("credit");
+    }
+
+    @Test
+    public void NewEP4_2GetInfoAboutShoppingCardProductTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        //класс в котором у нас лежит метод по получению access token
+        GetToken getToken = new GetToken();
+
+        String endPoint = "/card/products";
+        String card = "/Shopping%20Card/";
+
+        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> headersMap = new HashMap<>();
+
+          // Добавляем элементы в Map
+//        paramsMap.put("isActive", "true");
+//        paramsMap.put("type","debet");
+
+//        Данные для авторизации:
+//
+//        Телефон: 76666666666
+//        Пароль: Ihave6Cards!
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+//      accessToken передаем в header() вместе с доп заголовками: "Authorization", "Bearer "
+
+        paramsMap.put("isActive", "true");
+        headersMap.put("Authorization", "Bearer " + accessToken);
+
+        //помещаем ответ запроса в класс pojo и объявляя для него переменную для взаимодействия
+        CardProductInfo cardProductInfo = getRequest(paramsMap,headersMap,endPoint+card).as(CardProductInfo.class);
+
+        //Проверяем название карты и ее тип
+        cardProductInfo.getName().equals("Shopping Card");
+        cardProductInfo.getType().equals("credit");
+    }
+
+    @Test
+    public void CleanEP4_2GetInfoAboutShoppingCardProductTest() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        GetToken getToken = new GetToken();
+
+        String endPoint = "/card/products";
+        String card = "/Shopping%20Card/";
+
+        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> headersMap = new HashMap<>();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        paramsMap.put("isActive", "true");
+        headersMap.put("Authorization", "Bearer " + accessToken);
+
+        CardProductInfo cardProductInfo = getRequest(paramsMap,headersMap,endPoint+card).as(CardProductInfo.class);
+
         cardProductInfo.getName().equals("Shopping Card");
         cardProductInfo.getType().equals("credit");
     }

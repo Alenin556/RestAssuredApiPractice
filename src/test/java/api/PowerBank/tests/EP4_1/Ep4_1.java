@@ -8,10 +8,10 @@ import api.ReqresSitePractice.Specifications;
 import groovy.util.logging.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import static api.PowerBank.ApiHelp.ApiRequests.getListRequest;
 import static api.PowerBank.ApiHelp.CardService.CardRequests.getListOfParams;
 import static api.PowerBank.ApiHelp.CardService.CardRequests.getParamsSwitchCase;
 import static io.restassured.RestAssured.given;
@@ -19,7 +19,7 @@ import static io.restassured.RestAssured.given;
 @Slf4j
 public class Ep4_1 {
 
-    private final static String URL = "http://172.17.1.45:7254/api/v1";
+    private final static String URL = "http://172.17.1.46:7254/api/v1";
 
     @Test
     public void EP4_1GetInfoAboutClientCardTest() {
@@ -81,6 +81,32 @@ public class Ep4_1 {
         //Проверяем что пользователь не заблокирован
         response.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(), false));
         response.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
+    }
+
+    @Test
+    public void CleanEP4_1GetInfoAboutClientCardRequestMethodTest() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        //Создаем объект для использования метода по отправке запроса
+        GetToken getToken = new GetToken();
+        String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
+
+        String endPoint = "/card/agreements";
+
+        //Создаем коллекцию с необходимыми вводными параметрами и headers
+        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> headersMap = new HashMap<>();
+
+        paramsMap.put("isActive", "true");
+        headersMap.put("Authorization", "Bearer " + accessToken);
+
+        List <CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
+        //присваиваем переменной ответ для обработки и проверки
+
+        //Проверяем что пользователь не заблокирован
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(), false));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
     }
 
 
