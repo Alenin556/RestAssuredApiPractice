@@ -47,27 +47,4 @@ public class Specifications {
         RestAssured.requestSpecification = request;
         RestAssured.responseSpecification = response;
     }
-
-    public static RequestSpecification installParam(HashMap<String,String> paramMap) {
-        //таблица Param
-        //поиск по ключу и вывод значения для ввода в параметр
-        Map<String, String> params = new HashMap<>();
-
-        // Добавляем элементы в Map
-        params.put("isActive", "true");
-        params.put("type","debet");
-        params.put("type","credit");
-        params.put("type","virtual");
-
-        for(String keyName: params.keySet()){
-            String arrayKeyName = keyName;
-            System.out.println(arrayKeyName);
-        }
-        return new RequestSpecBuilder()
-                .addPathParam(paramMap.get(0))
-                .addPathParam("type", "debet")
-                .build();
-    }
-
-    public static RequestSpecification requestSpecification = given
 }

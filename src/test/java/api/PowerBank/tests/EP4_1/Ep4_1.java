@@ -1,17 +1,19 @@
 package api.PowerBank.tests.EP4_1;
 
 import api.PowerBank.ApiHelp.*;
+import api.PowerBank.ApiHelp.CardService.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.ReqresSitePractice.Specifications;
 import groovy.util.logging.Slf4j;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
 
+import static api.PowerBank.ApiHelp.CardService.CardRequests.getListOfParams;
+import static api.PowerBank.ApiHelp.CardService.CardRequests.getParamsSwitchCase;
 import static io.restassured.RestAssured.given;
 
 @Slf4j
@@ -195,6 +197,7 @@ public class Ep4_1 {
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
     }
 
+    //+
     @Test
     public void EP4_1GetInfoAboutCreditCardMethodRequestTest() {
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
@@ -209,6 +212,57 @@ public class Ep4_1 {
 
         response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
     }
+
+    //+-
+
+    @Test
+    public void EP4_1GetInfoAboutCreditCardMethodRequestTestWithList() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        var response = cardRequests.getCardAgreementsInfoRequestListParameter(getListOfParams(),accessToken);
+
+        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
+    }
+
+    //--
+    @Test
+    public void EP4_1GetInfoAboutCreditCardMethodRequestTestWithSwitchCase() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        CardRequests cardRequests = new CardRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        var response = cardRequests.getCardAgreementsInfoRequest(getParamsSwitchCase(1),getParamsSwitchCase(2),accessToken,getParamsSwitchCase(5));
+
+        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
+    }
+
+    @Test
+    public void EP4_1GetInfoAboutCreditCardMethodRequestTestWithGeneralApiMethod() {
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        ApiRequests apiRequests = new ApiRequests();
+
+        GetToken getToken = new GetToken();
+
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        String endPoint = "/card/agreements"; // поместить значения endpoints в resources
+
+        var response = apiRequests.getRequest("isActive","true", accessToken, endPoint);
+
+        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
+    }
+
 
     @Test
     public void EP4_1GetInfoAboutVirtualCardTest() {

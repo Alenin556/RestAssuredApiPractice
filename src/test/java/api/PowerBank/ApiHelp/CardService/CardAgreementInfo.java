@@ -1,5 +1,10 @@
 package api.PowerBank.ApiHelp.CardService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class CardAgreementInfo {
     public String name;
     public String cardNumber;
@@ -61,4 +66,5 @@ public class CardAgreementInfo {
     public Boolean getBankBlocked() {
         return isBankBlocked;
     }
+
 }
