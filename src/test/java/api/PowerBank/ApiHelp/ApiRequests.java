@@ -39,6 +39,24 @@ public class ApiRequests {
         return cardAgreementInfo;
     }
 
+    public static Response getRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
+
+        Response getResponse = (Response) given()
+                .params(paramsMap)
+                .headers(headersMap)
+                .when()
+                .get(endpoint)
+                .then()
+                .log()
+                .all()
+
+                //извлекаем ответ в класс
+                .extract()
+                .body();
+
+        return getResponse;
+    }
+
     public static List<CardAgreementInfo> getListRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
         List<CardAgreementInfo> cardAgreementInfo;
 
@@ -66,23 +84,6 @@ public class ApiRequests {
         return cardAgreementInfo;
     }
 
-    public static Response getRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
-
-        Response getResponse = (Response) given()
-                .params(paramsMap)
-                .headers(headersMap)
-                .when()
-                .get(endpoint)
-                .then()
-                .log()
-                .all()
-
-                //извлекаем ответ в класс
-                .extract()
-                .body();
-
-        return getResponse;
-    }
 
 
 }

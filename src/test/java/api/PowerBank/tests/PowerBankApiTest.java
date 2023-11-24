@@ -73,6 +73,7 @@ public class PowerBankApiTest {
         //Создаем конструктор с данными
         TransactionBody transactionBody = new TransactionBody(0, 10,"1403202300001A","2022-07-18","2023-07-18","Пополнение вклада");
 
+        //объявляем переменную класса типа Deposit..response где произойдет сохранение ответа в коллекцию списка и объект типа pagination
         DepositTransactionsResponse depositTransactionResponse = (given()
                 //подставляем данные header + body
                 .header("Authorization", "Bearer " + getToken.accessToken("79772345685","ls23Ghq#wEr"))

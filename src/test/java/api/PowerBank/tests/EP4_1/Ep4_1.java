@@ -23,7 +23,8 @@ public class Ep4_1 {
 
     @Test
     public void EP4_1GetInfoAboutClientCardTest() {
-        //Пред установки и пред проверка запроса на статус ответа
+        // Пред установки и пред проверка запросаБ
+        // ПРОВЕРЯЕМ : URL и статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
         //Класс в котором у нас лежит метод по получению access token
@@ -60,6 +61,8 @@ public class Ep4_1 {
         //Проверяем что пользователь не заблокирован
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(), false));
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
+
+        Assertions.assertEquals(cardAgreementInfo.size(),2);
     }
 
     @Test

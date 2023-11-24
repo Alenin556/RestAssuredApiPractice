@@ -39,9 +39,12 @@ public class CleanEP4_1 {
         List<CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
         //присваиваем переменной ответ для обработки и проверки
 
-        //Проверяем что пользователь не заблокирован
+        //Проверяем что карты пользователя не заблокированы
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getUserBlocked(), false));
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
+
+        //Проверяем количество карт клиента
+        Assertions.assertEquals(cardAgreementInfo.size(),2);
     }
 
     @Test
@@ -51,7 +54,7 @@ public class CleanEP4_1 {
 
         //Создаем объект для использования метода по отправке запроса
         GetToken getToken = new GetToken();
-        String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
 
         String endPoint = "/card/agreements";
 
@@ -77,7 +80,7 @@ public class CleanEP4_1 {
 
         //Создаем объект для использования метода по отправке запроса
         GetToken getToken = new GetToken();
-        String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
 
         String endPoint = "/card/agreements";
 
@@ -103,7 +106,7 @@ public class CleanEP4_1 {
 
         //Создаем объект для использования метода по отправке запроса
         GetToken getToken = new GetToken();
-        String accessToken = getToken.accessToken("79772345685", "ls23Ghq#wEr");
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
 
         String endPoint = "/card/agreements";
 
@@ -165,6 +168,7 @@ public class CleanEP4_1 {
 
         paramsMap.put("isActive", "true");
         paramsMap.put("type", "1");
+
         headersMap.put("Authorization", "Bearer " + accessToken);
 
         getListRequest(paramsMap, headersMap, endPoint);
