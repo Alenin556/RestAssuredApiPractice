@@ -1,12 +1,11 @@
-package api.PowerBank.tests;
+package api.PowerBank.tests.EP4_2;
 
-import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardProductInfo;
 import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.ReqresSitePractice.Specifications;
-import io.restassured.response.Response;
 
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static api.PowerBank.ApiHelp.ApiRequests.getListRequest1;
 import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
 import static io.restassured.RestAssured.given;
 
@@ -57,8 +57,58 @@ public class Ep4_2 {
                         .getList(".", CardProductsInfo.class)
         );
 
+
         //Проверяем количество карт
         Assertions.assertEquals(cardProductsInfo.size(),10);
+    }
+
+    @Test
+    public void EP4_2GetInfoAboutBankCardProductsMethod1Test() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        //класс в котором у нас лежит метод по получению access token
+        GetToken getToken = new GetToken();
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        String endPoint = "/card/products";
+
+        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> headersMap = new HashMap<>();
+
+        paramsMap.put("isActive", "true");
+        headersMap.put("Authorization", "Bearer " + accessToken);
+
+        CardProductsInfo cardProductsInfo = getRequest(paramsMap,headersMap,endPoint).as(CardProductsInfo.class);
+
+
+        //Проверяем количество карт
+        System.out.println("test");
+
+    }
+
+    @Test
+    public void EP4_2GetInfoAboutBankCardProductsMethod2Test() {
+        //Пред установки и пред проверка запроса на статус ответа
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+
+        //класс в котором у нас лежит метод по получению access token
+        GetToken getToken = new GetToken();
+        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+
+        String endPoint = "/card/products";
+
+        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> headersMap = new HashMap<>();
+
+        paramsMap.put("isActive", "true");
+        headersMap.put("Authorization", "Bearer " + accessToken);
+
+        List<CardProductsInfo> cardProductsInfo = getListRequest1(paramsMap,headersMap,endPoint);
+
+        //Проверяем количество карт
+        Assertions.assertEquals(cardProductsInfo.size(),10);
+
     }
 
 }

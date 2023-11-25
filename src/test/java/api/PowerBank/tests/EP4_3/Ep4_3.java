@@ -1,4 +1,4 @@
-package api.PowerBank.tests;
+package api.PowerBank.tests.EP4_3;
 
 import api.PowerBank.ApiHelp.CardService.CardProductInfo;
 import api.PowerBank.ApiHelp.GetToken;

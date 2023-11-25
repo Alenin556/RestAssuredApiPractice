@@ -1,5 +1,7 @@
 package api.PowerBank.ApiHelp.CardService;
 
+import java.util.List;
+
 public class CardProductsInfo {
     public String name;
     public String type;
