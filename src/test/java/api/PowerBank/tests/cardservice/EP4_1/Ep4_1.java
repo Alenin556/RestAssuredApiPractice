@@ -1,7 +1,6 @@
-package api.PowerBank.tests.EP4_1;
+package api.PowerBank.tests.cardservice.EP4_1;
 
 import api.PowerBank.ApiHelp.*;
-import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.ReqresSitePractice.Specifications;
@@ -154,36 +153,6 @@ public class Ep4_1 {
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "debet"));
     }
 
-    @Test
-    public void EP4_1GetInfoAboutDebetCardMethodRequestTest() {
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
-
-        CardRequests cardRequests = new CardRequests();
-
-        GetToken getToken = new GetToken();
-
-        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
-
-        //таблица Param
-        //поиск по ключу и вывод значения для ввода в параметр
-
-        java.util.Map<String, String> params = new HashMap<>();
-
-        // Добавляем элементы в Map
-        params.put("isActive", "true");
-        params.put("type","debet");
-        params.put("type","credit");
-        params.put("type","virtual");
-
-        for(String keyName: params.keySet()){
-            System.out.println(keyName);
-            System.out.println(params.get(keyName));
-        }
-
-        var response = cardRequests.getCardAgreementsInfoRequest("isActive","true",accessToken,"debet");
-
-        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "debet"));
-    }
 
     @Test
     public void EP4_1GetInfoAboutCreditCardTest() {
@@ -275,22 +244,6 @@ public class Ep4_1 {
         response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
     }
 
-    @Test
-    public void EP4_1GetInfoAboutCreditCardMethodRequestTestWithGeneralApiMethod() {
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
-
-        ApiRequests apiRequests = new ApiRequests();
-
-        GetToken getToken = new GetToken();
-
-        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
-
-        String endPoint = "/card/agreements"; // поместить значения endpoints в resources
-
-        var response = apiRequests.getRequest("isActive","true", accessToken, endPoint);
-
-        response.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
-    }
 
 
     @Test

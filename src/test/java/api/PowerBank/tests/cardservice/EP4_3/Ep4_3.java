@@ -1,9 +1,10 @@
-package api.PowerBank.tests.EP4_3;
+package api.PowerBank.tests.cardservice.EP4_3;
 
 import api.PowerBank.ApiHelp.CardService.CardProductInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.ReqresSitePractice.Specifications;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -173,7 +174,7 @@ public class Ep4_3 {
 
         CardProductInfo cardProductInfo = getRequest(paramsMap,headersMap,endPoint+card).as(CardProductInfo.class);
 
-        cardProductInfo.getName().equals("Shopping Card");
-        cardProductInfo.getType().equals("credit");
+        Assertions.assertEquals(cardProductInfo.getName(),"Shopping Card");
+        Assertions.assertEquals(cardProductInfo.getType(),"credit");
     }
 }

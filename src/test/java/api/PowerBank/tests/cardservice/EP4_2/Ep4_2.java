@@ -1,4 +1,4 @@
-package api.PowerBank.tests.EP4_2;
+package api.PowerBank.tests.cardservice.EP4_2;
 
 import api.PowerBank.ApiHelp.CardService.CardProductInfo;
 import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
@@ -111,29 +111,29 @@ public class Ep4_2 {
 
     }
 
-    @Test
-    public void EP4_2GetInfoAboutBankCardProductsMethod3Test() {
-        //Пред установки и пред проверка запроса на статус ответа
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
-
-        //класс в котором у нас лежит метод по получению access token
-        GetToken getToken = new GetToken();
-        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
-
-        String endPoint = "/card/products";
-
-        Map<String, String> paramsMap = new HashMap<>();
-        Map<String, String> headersMap = new HashMap<>();
-
-        paramsMap.put("isActive", "true");
-        headersMap.put("Authorization", "Bearer " + accessToken);
-
-        CardProductsInfo cardProductsInfo = getListRequest2(paramsMap,headersMap,endPoint,CardProductsInfo.class);
-
-
-        //Проверяем количество карт
-//        Assertions.assertEquals(cardProductsInfo.size(),10);
-
-    }
+//    @Test
+//    public void EP4_2GetInfoAboutBankCardProductsMethod3Test() {
+//        //Пред установки и пред проверка запроса на статус ответа
+//        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
+//
+//        //класс в котором у нас лежит метод по получению access token
+//        GetToken getToken = new GetToken();
+//        String accessToken = getToken.accessToken("76666666666", "Ihave6Cards!");
+//
+//        String endPoint = "/card/products";
+//
+//        Map<String, String> paramsMap = new HashMap<>();
+//        Map<String, String> headersMap = new HashMap<>();
+//
+//        paramsMap.put("isActive", "true");
+//        headersMap.put("Authorization", "Bearer " + accessToken);
+//
+//        CardProductsInfo cardProductsInfo = getListRequest2(paramsMap,headersMap,endPoint,CardProductsInfo.class);
+//
+//
+//        //Проверяем количество карт
+////        Assertions.assertEquals(cardProductsInfo.size(),10);
+//
+//    }
 
 }

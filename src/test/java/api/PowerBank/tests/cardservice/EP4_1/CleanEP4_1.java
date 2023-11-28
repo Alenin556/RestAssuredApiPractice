@@ -1,4 +1,4 @@
-package api.PowerBank.tests.EP4_1;
+package api.PowerBank.tests.cardservice.EP4_1;
 
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
@@ -19,7 +19,7 @@ public class CleanEP4_1 {
     private final static String URL = "http://172.17.1.46:7254/api/v1";
 
     @Test
-    public void CleanEP4_1GetInfoAboutClientCardRequestMethodTest() {
+    public void CleanEP4_1GetInfoAboutClientCardsRequestMethodTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
@@ -44,11 +44,11 @@ public class CleanEP4_1 {
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getBankBlocked(), false));
 
         //Проверяем количество карт клиента
-        Assertions.assertEquals(cardAgreementInfo.size(),2);
+        Assertions.assertEquals(2,cardAgreementInfo.size());
     }
 
     @Test
-    public void CleanEP4_1GetInfoAboutDebetCardTest() {
+    public void CleanEP4_1GetInfoAboutDebetCardsTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
@@ -70,11 +70,11 @@ public class CleanEP4_1 {
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что пользователь не заблокирован
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "debet"));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals( "debet",x.getType()));
     }
 
     @Test
-    public void CleanEP4_1GetInfoAboutCreditCardTest() {
+    public void CleanEP4_1GetInfoAboutCreditCardsTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
@@ -96,11 +96,11 @@ public class CleanEP4_1 {
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что пользователь не заблокирован
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "credit"));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals( "credit",x.getType()));
     }
 
     @Test
-    public void CleanEP4_1GetInfoAboutVirtualCardTest() {
+    public void CleanEP4_1GetInfoAboutVirtualCardsTest() {
         //Пред установки и пред проверка запроса на статус ответа
         Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
@@ -122,7 +122,7 @@ public class CleanEP4_1 {
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что пользователь не заблокирован
-        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals(x.getType(), "virtual"));
+        cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals("virtual",x.getType()));
     }
 
     @Test
@@ -148,7 +148,7 @@ public class CleanEP4_1 {
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что ответ в body пустой, т.е. класс пуст и не имеет ни одного ответа в поле
-        Assertions.assertEquals(cardAgreementInfo.size(), 0);
+        Assertions.assertEquals(0,cardAgreementInfo.size());
     }
 
     @Test
