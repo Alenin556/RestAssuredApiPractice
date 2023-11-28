@@ -2,7 +2,7 @@ package api.PowerBank.tests;
 
 import api.PowerBank.ApiHelp.GetToken;
 import api.PowerBank.ApiHelp.DepositService.DepositTransactionsResponse;
-import api.ReqresSitePractice.Specifications;
+import api.PowerBank.ApiHelp.Specifications;
 import api.PowerBank.ApiHelp.Auth;
 import api.PowerBank.ApiHelp.Token;
 import api.PowerBank.ApiHelp.DepositService.DepositTransaction;

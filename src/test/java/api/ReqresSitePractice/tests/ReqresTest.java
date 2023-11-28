@@ -1,5 +1,6 @@
 package api.ReqresSitePractice.tests;
 
+import api.PowerBank.ApiHelp.Specifications;
 import api.ReqresSitePractice.*;
 import groovy.util.logging.Slf4j;
 import io.restassured.http.ContentType;

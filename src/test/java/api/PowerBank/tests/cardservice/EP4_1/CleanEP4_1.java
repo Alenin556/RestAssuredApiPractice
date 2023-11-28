@@ -3,7 +3,7 @@ package api.PowerBank.tests.cardservice.EP4_1;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.PowerBank.ApiHelp.GetToken;
-import api.ReqresSitePractice.Specifications;
+import api.PowerBank.ApiHelp.Specifications;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 import static api.PowerBank.ApiHelp.ApiRequests.getListRequest;
-import static io.restassured.RestAssured.given;
+import static api.PowerBank.ApiHelp.Specifications.URL;
+
 
 public class CleanEP4_1 {
 
-    private final static String URL = "http://172.17.1.46:7254/api/v1";
 
     @Test
     public void CleanEP4_1GetInfoAboutClientCardsRequestMethodTest() {

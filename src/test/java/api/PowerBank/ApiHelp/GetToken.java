@@ -1,6 +1,5 @@
 package api.PowerBank.ApiHelp;
 
-import api.ReqresSitePractice.Specifications;
 import org.junit.Assert;
 
 

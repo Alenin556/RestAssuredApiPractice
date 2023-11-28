@@ -1,4 +1,4 @@
-package api.ReqresSitePractice;
+package api.PowerBank.ApiHelp;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Specifications {
 
+    public final static String URL = "http://172.17.1.46:7254/api/v1";
     public static RequestSpecification requestSpec(String url) {
         return new RequestSpecBuilder()
                 .setBaseUri(url)

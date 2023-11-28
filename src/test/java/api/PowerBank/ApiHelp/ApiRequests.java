@@ -12,7 +12,6 @@ import static io.restassured.RestAssured.given;
 
 public class ApiRequests {
 
-
     public static Response getRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
 
         Response getResponse = (Response) given()
@@ -59,7 +58,7 @@ public class ApiRequests {
         return cardAgreementInfo;
     }
 
-    public static List<CardProductsInfo> getListRequest1(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
+    public static List<CardProductsInfo> getListCardProductsRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
         List<CardProductsInfo> cardProductsInfo;
 
         cardProductsInfo = (
