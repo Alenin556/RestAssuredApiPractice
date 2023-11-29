@@ -3,7 +3,6 @@ package api.PowerBank.tests.cardservice.EP4_1;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.PowerBank.ApiHelp.GetToken;
-import api.PowerBank.ApiHelp.PaymentService.TranslationTemplateInfo;
 import api.PowerBank.ApiHelp.Specifications;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.PowerBank.ApiHelp.ApiRequests.getListRequest;
 import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
@@ -74,7 +72,10 @@ public class CleanEP4_1 {
         paramsMap.put("type", "debet");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        List<CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
+        List<CardAgreementInfo> cardAgreementInfo;
+
+        Response response = getRequest(paramsMap,headersMap,endPoint);
+        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что пользователь не заблокирован
@@ -100,7 +101,10 @@ public class CleanEP4_1 {
         paramsMap.put("type", "credit");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        List<CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
+        List<CardAgreementInfo> cardAgreementInfo;
+
+        Response response = getRequest(paramsMap,headersMap,endPoint);
+        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что пользователь не заблокирован
@@ -126,7 +130,10 @@ public class CleanEP4_1 {
         paramsMap.put("type", "virtual");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        List<CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
+        List<CardAgreementInfo> cardAgreementInfo;
+
+        Response response = getRequest(paramsMap,headersMap,endPoint);
+        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что пользователь не заблокирован
@@ -152,7 +159,10 @@ public class CleanEP4_1 {
         paramsMap.put("type", "virtual");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        List<CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
+        List<CardAgreementInfo> cardAgreementInfo;
+
+        Response response = getRequest(paramsMap,headersMap,endPoint);
+        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем что ответ в body пустой, т.е. класс пуст и не имеет ни одного ответа в поле
@@ -179,7 +189,10 @@ public class CleanEP4_1 {
 
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        getListRequest(paramsMap, headersMap, endPoint);
+        List<CardAgreementInfo> cardAgreementInfo;
+
+        Response response = getRequest(paramsMap,headersMap,endPoint);
+        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
     }
 
     @Test

@@ -3,6 +3,7 @@ package api.PowerBank.tests.cardservice.EP4_4;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.PowerBank.ApiHelp.Specifications;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.PowerBank.ApiHelp.ApiRequests.getListRequest;
+import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
 public class Ep4_4 {
@@ -34,7 +35,10 @@ public class Ep4_4 {
         paramsMap.put("isActive", "true");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        List<CardAgreementInfo> cardAgreementInfo = getListRequest(paramsMap, headersMap, endPoint);
+        List<CardAgreementInfo> cardAgreementInfo;
+
+        Response response = getRequest(paramsMap,headersMap,endPoint+cardNumber);
+        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
         //Проверяем номер карты

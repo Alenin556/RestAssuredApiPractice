@@ -38,6 +38,12 @@ public class Specifications {
                 .build();
     }
 
+    public static ResponseSpecification responseSpecNotFound404() {
+        return new ResponseSpecBuilder()
+                .expectStatusCode(404)
+                .build();
+    }
+
     public static ResponseSpecification responseSpecBAD500() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(500)
@@ -46,6 +52,10 @@ public class Specifications {
 
     public static void installSpecification(RequestSpecification request, ResponseSpecification response) {
         RestAssured.requestSpecification = request;
+        RestAssured.responseSpecification = response;
+    }
+
+    public static void checkStatusCode(ResponseSpecification response){
         RestAssured.responseSpecification = response;
     }
 }
