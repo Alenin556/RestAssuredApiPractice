@@ -3,6 +3,8 @@ package api.PowerBank.ApiHelp;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
 import api.PowerBank.ApiHelp.DepositService.DepositsInfo;
+import api.PowerBank.ApiHelp.PaymentService.SavedTemplateInfo;
+import api.PowerBank.ApiHelp.PaymentService.TranslationTemplateInfo;
 import io.restassured.response.Response;
 
 import java.util.List;
@@ -29,34 +31,47 @@ public class ApiRequests {
 
         return getResponse;
     }
+    // + 1 get
+    // + 1 post
+
+// вынести в тестовые методы преобразование в лист
+//    List<CardAgreementInfo> cardAgreementInfo;
+//
+//    Response response = getRequest(paramsMap,headersMap,endpoint);
+//    cardAgreementInfo = response.jsonPath().getList(".", CardAgreementInfo.class);
+
 
 
     public static List<CardAgreementInfo> getListRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
         List<CardAgreementInfo> cardAgreementInfo;
 
-        cardAgreementInfo = (
-                given()
-                        //подставляем параметры запроса
-                        .params(paramsMap)
-                        //подставляем данные header
-                        .headers(headersMap)
-                        //подставляем данные body
-                        .when()
-                        // указываем endpoint и HTTP метод
-                        .get(endpoint)
-                        .then()
-                        .log()
-                        .all()
+        Response response = getRequest(paramsMap,headersMap,endpoint);
+        cardAgreementInfo = response.jsonPath().getList(".", CardAgreementInfo.class);
 
-                        //извлекаем ответ в класс pojo
-                        .extract()
-                        .body()
-                        .jsonPath()
-                        //в пути ставим точку так как нет явного открытия массива в теле ответа
-                        .getList(".", CardAgreementInfo.class));
+//        cardAgreementInfo = (
+//                given()
+//                        //подставляем параметры запроса
+//                        .params(paramsMap)
+//                        //подставляем данные header
+//                        .headers(headersMap)
+//                        //подставляем данные body
+//                        .when()
+//                        // указываем endpoint и HTTP метод
+//                        .get(endpoint)
+//                        .then()
+//                        .log()
+//                        .all()
+//
+//                        //извлекаем ответ в класс pojo
+//                        .extract()
+//                        .body()
+//                        .jsonPath()
+//                        //в пути ставим точку так как нет явного открытия массива в теле ответа
+//                        .getList(".", CardAgreementInfo.class));
 
         return cardAgreementInfo;
     }
+
 
     public static List<CardProductsInfo> getListCardProductsRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
         List<CardProductsInfo> cardProductsInfo;
@@ -85,32 +100,6 @@ public class ApiRequests {
         return cardProductsInfo;
     }
 
-    public static  <E>  E getListRequest2(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint, Class<E> tClass) {
-        List<E> response;
-
-        response = (
-                given()
-                        //подставляем параметры запроса
-                        .params(paramsMap)
-                        //подставляем данные header
-                        .headers(headersMap)
-                        //подставляем данные body
-                        .when()
-                        // указываем endpoint и HTTP метод
-                        .get(endpoint)
-                        .then()
-                        .log()
-                        .all()
-
-                        //извлекаем ответ в класс pojo
-                        .extract()
-                        .body()
-                        .jsonPath()
-                        //в пути ставим точку так как нет явного открытия массива в теле ответа
-                        .getList(".", tClass));
-
-        return (E) response;
-    }
 
     public static List<DepositsInfo> getDepositListRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
         List<DepositsInfo> depositsInfo;
@@ -137,6 +126,60 @@ public class ApiRequests {
                         .getList(".", DepositsInfo.class));
 
         return depositsInfo;
+    }
+
+    public static List<TranslationTemplateInfo> getTranslationTemplateListRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
+        List<TranslationTemplateInfo> translationTemplateInfo;
+
+        translationTemplateInfo = (
+                given()
+                        //подставляем параметры запроса
+                        .params(paramsMap)
+                        //подставляем данные header
+                        .headers(headersMap)
+                        //подставляем данные body
+                        .when()
+                        // указываем endpoint и HTTP метод
+                        .get(endpoint)
+                        .then()
+                        .log()
+                        .all()
+
+                        //извлекаем ответ в класс pojo
+                        .extract()
+                        .body()
+                        .jsonPath()
+                        //в пути ставим точку так как нет явного открытия массива в теле ответа
+                        .getList(".", TranslationTemplateInfo.class));
+
+        return translationTemplateInfo;
+    }
+
+    public static List<SavedTemplateInfo> getSavedTemplateListRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
+        List<SavedTemplateInfo> savedTemplateInfo;
+
+        savedTemplateInfo = (
+                given()
+                        //подставляем параметры запроса
+                        .params(paramsMap)
+                        //подставляем данные header
+                        .headers(headersMap)
+                        //подставляем данные body
+                        .when()
+                        // указываем endpoint и HTTP метод
+                        .get(endpoint)
+                        .then()
+                        .log()
+                        .all()
+
+                        //извлекаем ответ в класс pojo
+                        .extract()
+                        .body()
+                        .jsonPath()
+                        //в пути ставим точку так как нет явного открытия массива в теле ответа
+                        .getList(".", SavedTemplateInfo.class));
+
+        return savedTemplateInfo;
     }
 
 
