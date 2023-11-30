@@ -1,11 +1,9 @@
 package api.PowerBank.tests.paymentservice.EP5_5;
 
-import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.PowerBank.ApiHelp.PaymentService.TranslationTemplateInfo;
 import api.PowerBank.ApiHelp.Specifications;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -37,7 +35,7 @@ public class Ep5_5 {
 
         List<TranslationTemplateInfo> translationTemplateInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = getRequestP(paramsMap,headersMap,endPoint);
         translationTemplateInfo = response.getBody().jsonPath().getList(".", TranslationTemplateInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 

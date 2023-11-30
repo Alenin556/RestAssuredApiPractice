@@ -1,5 +1,6 @@
 package api.PowerBank.tests.depositservice.EP3_1;
 
+import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.DepositService.DepositsInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.PowerBank.ApiHelp.Specifications;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static api.PowerBank.ApiHelp.ApiRequests.getDepositListRequest;
-import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
+import static api.PowerBank.ApiHelp.ApiRequests.getRequestP;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
 public class ep3_1 {
@@ -31,7 +32,7 @@ public class ep3_1 {
         paramsMap.put("isActive", "true");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        DepositsInfo depositsInfo = getRequest(paramsMap, headersMap, endPoint).as(DepositsInfo.class);
+        DepositsInfo depositsInfo = ApiRequests.getRequestP(paramsMap, headersMap, endPoint).as(DepositsInfo.class);
 
         //Проверяем количество депозитных карт банка
         System.out.println(depositsInfo.getName());
@@ -93,7 +94,7 @@ public class ep3_1 {
         paramsMap.put("isActive", "12");
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        getRequest(paramsMap, headersMap, endPoint);
+        ApiRequests.getRequestP(paramsMap, headersMap, endPoint);
     }
 
     @Test
@@ -107,7 +108,7 @@ public class ep3_1 {
         paramsMap.put("isActive", "true");
         headersMap.put("Authorization", "Bearer");
 
-        getRequest(paramsMap, headersMap, endPoint);
+        ApiRequests.getRequestP(paramsMap, headersMap, endPoint);
     }
 
 

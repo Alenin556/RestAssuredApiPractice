@@ -32,7 +32,7 @@ public class Ep5_6 {
         paramsMap.put("templateId",UUid);
         headersMap.put("Authorization", "Bearer " + accessToken);
 
-        SavedTemplateInfo templateInfo = getRequest(paramsMap,headersMap,endPoint).as(SavedTemplateInfo.class);
+        SavedTemplateInfo templateInfo = getRequestP(paramsMap,headersMap,endPoint).as(SavedTemplateInfo.class);
 
         Assertions.assertEquals(UUid, templateInfo.getTemplateId());
     }
@@ -52,7 +52,7 @@ public class Ep5_6 {
         headersMap.put("Authorization", "Bearer ");
 
         Specifications.checkStatusCode(Specifications.responseSpecUnauthorized401());
-        getRequest(paramsMap,headersMap,endPoint);
+        getRequestP(paramsMap,headersMap,endPoint);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class Ep5_6 {
         headersMap.put("Authorization", "Bearer " + accessToken);
 
         Specifications.checkStatusCode(Specifications.responseSpecError400());
-        getRequest(paramsMap,headersMap,endPoint);
+        getRequestP(paramsMap,headersMap,endPoint);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class Ep5_6 {
         headersMap.put("Authorization", "Bearer " + accessToken);
 
         Specifications.checkStatusCode(Specifications.responseSpecNotFound404());
-        getRequest(paramsMap,headersMap,endPoint);
+        getRequestP(paramsMap,headersMap,endPoint);
     }
 
 }

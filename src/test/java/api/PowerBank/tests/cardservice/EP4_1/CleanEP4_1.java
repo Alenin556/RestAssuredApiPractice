@@ -1,5 +1,6 @@
 package api.PowerBank.tests.cardservice.EP4_1;
 
+import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardRequests;
 import api.PowerBank.ApiHelp.GetToken;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
+import static api.PowerBank.ApiHelp.ApiRequests.getRequestP;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
 
@@ -41,7 +42,7 @@ public class CleanEP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -74,7 +75,7 @@ public class CleanEP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -103,7 +104,7 @@ public class CleanEP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -132,7 +133,7 @@ public class CleanEP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -161,7 +162,7 @@ public class CleanEP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -191,7 +192,7 @@ public class CleanEP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
     }
 

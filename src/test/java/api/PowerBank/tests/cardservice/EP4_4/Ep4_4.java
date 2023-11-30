@@ -1,5 +1,6 @@
 package api.PowerBank.tests.cardservice.EP4_4;
 
+import api.PowerBank.ApiHelp.ApiRequests;
 import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.GetToken;
 import api.PowerBank.ApiHelp.Specifications;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.PowerBank.ApiHelp.ApiRequests.getRequest;
+import static api.PowerBank.ApiHelp.ApiRequests.getRequestP;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
 public class Ep4_4 {
@@ -37,7 +38,7 @@ public class Ep4_4 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = getRequest(paramsMap,headersMap,endPoint+cardNumber);
+        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint+cardNumber);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 

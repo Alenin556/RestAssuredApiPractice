@@ -1,6 +1,5 @@
 package api.PowerBank.ApiHelp;
 
-import api.PowerBank.ApiHelp.CardService.CardAgreementInfo;
 import api.PowerBank.ApiHelp.CardService.CardProductsInfo;
 import api.PowerBank.ApiHelp.DepositService.DepositTransaction;
 import api.PowerBank.ApiHelp.DepositService.DepositsInfo;
@@ -9,7 +8,6 @@ import api.PowerBank.ApiHelp.PaymentService.SavedTemplateInfo;
 import api.PowerBank.ApiHelp.PaymentService.TranslationTemplateInfo;
 import io.restassured.response.Response;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +34,7 @@ public class ApiRequests {
         return getResponse;
     }
 
-    public static Response getRequest(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
+    public static Response getRequestP(Map<String, String> paramsMap, Map<String,String> headersMap, String endpoint) {
 
         Response getResponse = (Response) given()
                 .params(paramsMap)
@@ -98,10 +96,10 @@ public class ApiRequests {
     }
     // + 1 post
 
-//    вынести в тестовые методы преобразование ответа метода getRequest в лист
+//    вынести в тестовые методы преобразование ответа метода getRequestP в лист
 //    List<CardAgreementInfo> cardAgreementInfo;
 //
-//    Response response = getRequest(paramsMap,headersMap,endpoint);
+//    Response response = getRequestP(paramsMap,headersMap,endpoint);
 //    cardAgreementInfo = response.jsonPath().getList(".", CardAgreementInfo.class);
 
 
