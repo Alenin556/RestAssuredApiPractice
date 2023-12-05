@@ -16,13 +16,12 @@ import static io.restassured.RestAssured.given;
 
 public class ApiRequests {
 
-    public static Response getRequest() {
+    public static Response getRequest(Map<String,String> headersMap, String endpoint) {
 
         Response getResponse = (Response) given()
-                .params("isActive","true")
-                .headers("Authorization", "Bearer ")
+                .headers(headersMap)
                 .when()
-                .get()
+                .get(endpoint)
                 .then()
                 .log()
                 .all()

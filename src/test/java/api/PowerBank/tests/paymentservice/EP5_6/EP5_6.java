@@ -13,7 +13,7 @@ import static api.PowerBank.ApiHelp.ApiRequests.*;
 import static api.PowerBank.ApiHelp.PaymentService.TranslationTemplateInfo.getUUidTranslationTemplate;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
-public class Ep5_6 {
+public class EP5_6 {
 
     @Test
     public void EP5_6ValidSelectionOfSavedTemplatesTest() {

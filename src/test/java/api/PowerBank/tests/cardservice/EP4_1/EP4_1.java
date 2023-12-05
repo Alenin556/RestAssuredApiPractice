@@ -13,11 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.PowerBank.ApiHelp.ApiRequests.getRequestP;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
 
-public class CleanEP4_1 {
+public class EP4_1 {
 
     //поправить после поднятия CardService
 

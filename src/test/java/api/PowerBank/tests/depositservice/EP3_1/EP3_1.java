@@ -12,10 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 import static api.PowerBank.ApiHelp.ApiRequests.getDepositListRequest;
-import static api.PowerBank.ApiHelp.ApiRequests.getRequestP;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
-public class ep3_1 {
+public class EP3_1 {
 
     @Test
     public void CleanEP3_1GetInfoAboutDepositProducts1Test() {

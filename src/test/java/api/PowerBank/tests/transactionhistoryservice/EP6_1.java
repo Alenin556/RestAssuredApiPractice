@@ -1,27 +1,17 @@
-package api.PowerBank.tests;
+package api.PowerBank.tests.transactionhistoryservice;
 
 import api.PowerBank.ApiHelp.GetToken;
 import api.PowerBank.ApiHelp.DepositService.DepositTransactionsResponse;
-import api.PowerBank.ApiHelp.PaymentService.SavedTemplateInfo;
 import api.PowerBank.ApiHelp.Specifications;
-import api.PowerBank.ApiHelp.Auth;
-import api.PowerBank.ApiHelp.Token;
-import api.PowerBank.ApiHelp.DepositService.DepositTransaction;
 import api.PowerBank.ApiHelp.DepositService.TransactionBody;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import static api.PowerBank.ApiHelp.ApiRequests.postRequest;
-import static api.PowerBank.ApiHelp.PaymentService.TranslationTemplateInfo.getUUidTranslationTemplate;
-import static io.restassured.RestAssured.given;
+import static api.PowerBank.ApiHelp.Specifications.URL;
 
-public class Ep6_1 {
-    private final static String URL = "http://172.17.1.45:7254/api/v1";
-
+public class EP6_1 {
 
     @Test
     public void CleanEP6TransactionHistory(){

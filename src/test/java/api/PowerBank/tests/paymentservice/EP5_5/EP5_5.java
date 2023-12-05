@@ -13,7 +13,7 @@ import java.util.Map;
 import static api.PowerBank.ApiHelp.ApiRequests.*;
 import static api.PowerBank.ApiHelp.Specifications.URL;
 
-public class Ep5_5 {
+public class EP5_5 {
 
 
     @Test
