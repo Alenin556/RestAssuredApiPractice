@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static api.PowerBank.ApiHelp.Specifications.URL;
+import static api.PowerBank.ApiHelp.ApiRequests.getRequestP;
+import static api.PowerBank.ApiHelp.Specifications.*;
 
 
 public class EP4_1 {
@@ -41,7 +42,7 @@ public class EP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
+        Response response = getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -74,11 +75,11 @@ public class EP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
+        Response response = getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
-        //Проверяем что пользователь не заблокирован
+        //Проверяем тип карты
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals( "debet",x.getType()));
     }
 
@@ -103,11 +104,11 @@ public class EP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
+        Response response = getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
-        //Проверяем что пользователь не заблокирован
+        //Проверяем тип карты
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals( "credit",x.getType()));
     }
 
@@ -132,11 +133,11 @@ public class EP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
+        Response response = getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
-        //Проверяем что пользователь не заблокирован
+        //Проверяем тип карты
         cardAgreementInfo.stream().forEach(x -> Assertions.assertEquals("virtual",x.getType()));
     }
 
@@ -161,7 +162,7 @@ public class EP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
+        Response response = getRequestP(paramsMap,headersMap,endPoint);
         cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
         //присваиваем переменной ответ для обработки и проверки
 
@@ -172,7 +173,7 @@ public class EP4_1 {
     @Test
     public void CleanEP4_1GetInfoAboutUncorrectTypeCardTest() {
         //Пред установки и пред проверка запроса на статус ответа
-        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecError400());
+        Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 
         //Создаем объект для использования метода по отправке запроса
         GetToken getToken = new GetToken();
@@ -191,8 +192,8 @@ public class EP4_1 {
 
         List<CardAgreementInfo> cardAgreementInfo;
 
-        Response response = ApiRequests.getRequestP(paramsMap,headersMap,endPoint);
-        cardAgreementInfo = response.getBody().jsonPath().getList(".", CardAgreementInfo.class);
+        checkStatusCode(responseSpecNotFound404());
+        getRequestP(paramsMap,headersMap,endPoint);
     }
 
     @Test
