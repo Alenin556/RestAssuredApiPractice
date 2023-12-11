@@ -69,4 +69,20 @@ public class CardProductsInfo {
     public String getImageLink() {
         return imageLink;
     }
+
+    @Override
+    public String toString() {
+        return "CardProductsInfo{" +
+                "name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", currencyCode='" + currencyCode + '\'' +
+                ", cashbackMax=" + cashbackMax +
+                ", interestRate='" + interestRate + '\'' +
+                ", servicePrice=" + servicePrice +
+                ", interestFreeDays='" + interestFreeDays + '\'' +
+                ", paymentSystem='" + paymentSystem + '\'' +
+                ", imageLink='" + imageLink + '\'' +
+                '}';
+    }
 }
